@@ -1,32 +1,37 @@
-# IntellijMind - Your AI Search Buddy
+IntellijMind - Your AI Search Buddy
 
 This is a simple search engine powered by AI. It can answer your questions and give you helpful information.
 
-**What it does:**
+What it does:
 
-* Understands what you're asking, even if you use normal language.
-* Finds relevant information from the web.
-* Gives you clear and concise answers.
+Understands what you're asking, even if you use normal language.
 
-**How to use it:**
+Finds relevant information from the web.
 
-1. **Get the code:** Download the project files from [link to your repository].
-2. **Install stuff:** You'll need Python and some extra tools. See the detailed instructions in the full README [link to full README].
-3. **Run it:** Start the app and ask away!
+Gives you clear and concise answers.
 
-**Want to help?**
+How to use it:
+
+Get the code: Download the project files from [link to your repository].
+
+Install stuff: You'll need Python and some extra tools. See the detailed instructions in the full README [link to full README].
+
+Run it: Start the app and ask away!
+
+Want to help?
 
 We'd love your help! Check out the instructions on how to contribute [link to CONTRIBUTING.md].
 
-**License:**
+License:
 
-This project is free to use and modify. See the [LICENSE](LICENSE) file for details.
+This project is free to use and modify. See the LICENSE file for details.
 
-**Thanks to:**
+Thanks to:
 
-* Google for their AI tech.
-* Flask and Beautiful Soup for making things easier.
+Google for their AI tech.
 
-**Questions?**
+Flask and Beautiful Soup for making things easier.
 
-Contact us at [your-email@example.com](mailto:aniketkumar34@outlook.com).
+Questions?
+
+Contact us at aniketkumar34@outlook.com.
