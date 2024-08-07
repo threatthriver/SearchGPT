@@ -1,0 +1,3 @@
+Flask
+google-generativeai # Replace with the actual version if needed
+flask_limiter
