@@ -1,47 +1,44 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const chatBox = document.getElementById("chat-box");
-    const userInput = document.getElementById("user-input");
-    const sendButton = document.getElementById("send-button");
+const form = document.getElementById('search-form');
+const responseLines = document.getElementById('response-lines');
 
-    sendButton.addEventListener("click", sendMessage);
-    userInput.addEventListener("keypress", (e) => {
-        if (e.key === "Enter") {
-            sendMessage();
+form.addEventListener('submit', async (event) => {
+    event.preventDefault(); // Prevent default form submission
+
+    const query = form.query.value; // Get the query from the input field
+
+    try {
+        const response = await fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `query=${query}`
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
         }
-    });
 
-    function appendMessage(message, isUser) {
-        const messageDiv = document.createElement("div");
-        messageDiv.className = `message ${isUser ? "user-message" : "bot-message"}`;
-        messageDiv.innerHTML = `<p>${message}</p>`;
-        chatBox.appendChild(messageDiv);
-        chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
-    }
+        const data = await response.json();
+        responseLines.innerHTML = ''; // Clear previous response
 
-    async function sendMessage() {
-        const text = userInput.value.trim();
-        if (text === "") return;
-
-        appendMessage(text, true); // User message
-        userInput.value = "";
-
-        try {
-            const response = await fetch('/chat', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ message: text })
+        if (data.length === 1 && data[0] === "No results found.") {
+            // Handle the case where no results are found
+            const p = document.createElement('p');
+            p.textContent = "No results found.";
+            responseLines.appendChild(p);
+        } else {
+            // Display the response line by line
+            data.forEach(line => {
+                const p = document.createElement('p');
+                p.textContent = line;
+                responseLines.appendChild(p);
             });
-
-            if (response.ok) {
-                const data = await response.json();
-                appendMessage(data.response, false); // Bot message
-            } else {
-                appendMessage("Sorry, there was an error.", false);
-            }
-        } catch (error) {
-            appendMessage("Sorry, there was an error.", false);
         }
+    } catch (error) {
+        console.error('Error fetching response:', error);
+        // Handle the error appropriately, e.g., display an error message to the user
+        responseLines.innerHTML = '';
+        const p = document.createElement('p');
+        p.textContent = "An error occurred. Please try again later.";
+        responseLines.appendChild(p);
     }
 });
